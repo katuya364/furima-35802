@@ -68,9 +68,9 @@ Things you may want to cover:
 | item  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- has_one :shipping address
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
 ## shipping addressテーブル
 
