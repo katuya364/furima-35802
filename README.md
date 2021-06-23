@@ -72,14 +72,10 @@ Things you may want to cover:
 - belongs_to :item
 - has_one :shipping_address
 
-## shipping addressテーブル
+## shipping_addressテーブル
 
 |Column             |Type        |Options                         |
 |------------------ |----------- |------------------------------- |
-| credit_number     | integer    | null: false                    |
-| credit_pin        | integer    | null: false                    |
-| credit_valid_date | date       | null: false                    |
-| street_address    | string     | null: false                    |
 | postal_code       | integer    | null: false                    |
 | prefecture        | string     | null: false                    |
 | municipality      | string     | null: false                    |
