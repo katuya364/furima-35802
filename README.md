@@ -72,7 +72,7 @@ Things you may want to cover:
 - belongs_to :item
 - has_one :shipping_address
 
-## shipping_addressテーブル
+## shipping_addressesテーブル
 
 |Column             |Type        |Options                         |
 |------------------ |----------- |------------------------------- |
