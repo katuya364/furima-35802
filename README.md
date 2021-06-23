@@ -80,7 +80,7 @@ Things you may want to cover:
 | prefecture_id     | integer    | null: false                    |
 | municipality      | string     | null: false                    |
 | address           | string     | null: false                    |
-| building_name     | integer    |                                |
+| building_name     | string     |                                |
 | phone_number      | string     | null: false                    |
 | order             | references | null: false, foreign_key: true |
 
