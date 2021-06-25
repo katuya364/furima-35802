@@ -6,11 +6,15 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :first_name_kanji, format: { with: /\A[一-龥々ぁ-ん]+\z/, message: 'full-width characters' }
-    validates :last_name_kanji,  format: { with: /\A[一-龥々ぁ-ん]+\z/, message: 'full-width characters' }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: 'first_name_kana full-width katakana characters' }
-    validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: 'last_name_kana full-width katakana characters' }
     validates :birthday
     validates :password, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/, message: 'Include both letters and numbers' }
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'full-width characters'} do
+      validates :first_name_kanji 
+      validates :last_name_kanji
+    end
+    with_options format: { with: /\A[ァ-ヶー－]+\z/, message: 'full-width katakana characters'} do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
   end
 end
