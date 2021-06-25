@@ -69,12 +69,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Birthday can't be blank"
       end
-      it 'first_name_kanjiがひらがなと漢字以外では登録できない' do
+      it 'first_name_kanjiがひらがなと漢字、カタカナ以外では登録できない' do
         @user.first_name_kanji = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include 'First name kanji full-width characters'
       end
-      it 'last_name_kanjiがひらがなと漢字以外では登録できない' do
+      it 'last_name_kanjiがひらがなと漢字、カタカナ以外では登録できない' do
         @user.last_name_kanji = 'a'
         @user.valid?
         expect(@user.errors.full_messages).to include 'Last name kanji full-width characters'
@@ -82,12 +82,12 @@ RSpec.describe User, type: :model do
       it 'first_name_kanaがカタカナ以外では登録できない' do
         @user.first_name_kana = 'あ'
         @user.valid?
-        expect(@user.errors.full_messages).to include 'First name kana first_name_kana full-width katakana characters'
+        expect(@user.errors.full_messages).to include 'First name kana full-width katakana characters'
       end
       it 'last_name_kanaがカタカナ以外では登録できない' do
         @user.last_name_kana = 'あ'
         @user.valid?
-        expect(@user.errors.full_messages).to include 'Last name kana last_name_kana full-width katakana characters'
+        expect(@user.errors.full_messages).to include 'Last name kana full-width katakana characters'
       end
       it 'passwordが数字だけでは登録できない' do
         @user.password = '111111'
@@ -109,6 +109,16 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = '１ｂ１ｂ１ｂ'
         @user.valid?
         expect(@user.errors.full_messages).to include 'Password Include both letters and numbers'
+      end
+      it 'first_name_kanjiが半角カタカナでは登録できない' do
+        @user.first_name_kanji = 'ｱ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name kanji full-width characters"
+      end
+      it 'last_name_kanjiが半角カタカナでは登録できない' do
+        @user.last_name_kanji = 'ｱ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name kanji full-width characters"
       end
     end
   end
