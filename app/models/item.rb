@@ -13,7 +13,7 @@ class Item < ApplicationRecord
     validates :item_name
     validates :item_description
     validates :price
-    with_options numericality: { other_than: 1 }
+    with_options numericality: { other_than: 1 } do
       validates :category_id
       validates :condition_id
       validates :shipping_charge_id
