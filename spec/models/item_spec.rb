@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload("/images/test_image.png")
+    @item.image = fixture_file_upload('/images/test_image.png')
     @items = FactoryBot.build(:item)
   end
 
@@ -31,27 +31,27 @@ RSpec.describe Item, type: :model do
       it '商品のカテゴリーが未選択のとき' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Category must be other than 1"
+        expect(@item.errors.full_messages).to include 'Category must be other than 1'
       end
       it '商品の状態が未選択のとき' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Condition must be other than 1"
+        expect(@item.errors.full_messages).to include 'Condition must be other than 1'
       end
       it '配送料の負担が未選択のとき' do
         @item.shipping_charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Shipping charge must be other than 1"
+        expect(@item.errors.full_messages).to include 'Shipping charge must be other than 1'
       end
       it '発送元の地域が未選択のとき' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Prefecture must be other than 1"
+        expect(@item.errors.full_messages).to include 'Prefecture must be other than 1'
       end
       it '発送までの日数が未選択のとき' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include "Day must be other than 1"
+        expect(@item.errors.full_messages).to include 'Day must be other than 1'
       end
       it '価格が空のとき' do
         @item.price = ''
@@ -61,17 +61,17 @@ RSpec.describe Item, type: :model do
       it '価格が300未満のとき' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price Out of setting range"
+        expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
       it '価格が9999999以上のとき' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price Out of setting range"
+        expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
       it '価格が全角数値のとき' do
         @item.price = ('５００')
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price Input half-width characters"
+        expect(@item.errors.full_messages).to include 'Price Input half-width characters'
       end
     end
   end
