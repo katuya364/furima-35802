@@ -4,7 +4,6 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('/images/test_image.png')
-    @items = FactoryBot.build(:item)
   end
 
   describe '商品の出品' do
@@ -25,8 +24,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Item description can't be blank"
       end
       it '商品の画像がないとき' do
-        @items.valid?
-        expect(@items.errors.full_messages).to include "Image can't be blank"
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Image can't be blank"
       end
       it '商品のカテゴリーが未選択のとき' do
         @item.category_id = 1
