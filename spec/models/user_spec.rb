@@ -113,22 +113,22 @@ RSpec.describe User, type: :model do
       it 'first_name_kanjiが半角カタカナでは登録できない' do
         @user.first_name_kanji = 'ｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "First name kanji full-width characters"
+        expect(@user.errors.full_messages).to include 'First name kanji full-width characters'
       end
       it 'last_name_kanjiが半角カタカナでは登録できない' do
         @user.last_name_kanji = 'ｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Last name kanji full-width characters"
+        expect(@user.errors.full_messages).to include 'Last name kanji full-width characters'
       end
       it 'first_name_kanaが半角カタカナでは登録できない' do
         @user.first_name_kana = 'ｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "First name kana full-width katakana characters"
+        expect(@user.errors.full_messages).to include 'First name kana full-width katakana characters'
       end
       it 'last_name_kanaが半角カタカナでは登録できない' do
         @user.last_name_kana = 'ｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Last name kana full-width katakana characters"
+        expect(@user.errors.full_messages).to include 'Last name kana full-width katakana characters'
       end
     end
   end
