@@ -13,6 +13,10 @@ RSpec.describe ShippingAddress, type: :model do
       it '必須項目が入力されていれば購入できる' do
         expect(@shipping_address).to be_valid
       end
+      it '都道府県が空でも購入できる' do
+        @shipping_address.building_name = ''
+        expect(@shipping_address).to be_valid
+      end
       context '商品が出品できない場合' do
         it '郵便番号が入力できていないとき' do
           @shipping_address.postal_code = ''
@@ -44,7 +48,7 @@ RSpec.describe ShippingAddress, type: :model do
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Phone number can't be blank"
         end
-        it '電話番号が11桁未満のとき' do
+        it '電話番号が10桁未満のとき' do
           @shipping_address.phone_number = '123'
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
@@ -53,6 +57,26 @@ RSpec.describe ShippingAddress, type: :model do
           @shipping_address.token = nil
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Token can't be blank"
+        end
+        it 'user_idが空のとき' do
+          @shipping_address.user_id = nil
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "User can't be blank"
+        end
+        it 'item_idが空のとき' do
+        @shipping_address.item_id = nil
+        @shipping_address.valid?
+        expect(@shipping_address.errors.full_messages).to include "Item can't be blank"
+        end
+        it '電話番号が11桁を超えたとき' do
+          @shipping_address.phone_number = '111111111111'
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
+        end
+        it '電話番号に数字以外が含まれているとき' do
+          @shipping_address.phone_number = 'あああ'
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
         end
       end
     end 
