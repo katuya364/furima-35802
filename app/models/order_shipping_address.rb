@@ -9,7 +9,7 @@ class OrderShippingAddress
     validates :user_id
     validates :item_id
     validates :token
-    validates :phone_number, format: {with: /\A\d{11}\z/}
+    validates :phone_number, format: {with: /\A\d{10,11}\z/}
     with_options numericality: { other_than: 1 } do
       validates :prefecture_id
     end
