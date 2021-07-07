@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @order_shipping_address = OrderShippingAddress.new
   end
 
   def edit
