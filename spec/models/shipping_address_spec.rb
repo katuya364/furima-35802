@@ -33,6 +33,11 @@ RSpec.describe ShippingAddress, type: :model do
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Prefecture must be other than 1"
         end
+        it '都道府県が空では登録できない' do
+          @shipping_address.address = nil
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Address can't be blank"
+        end
         it '市区町村が空のとき' do
           @shipping_address.municipality = ''
           @shipping_address.valid?
@@ -53,6 +58,16 @@ RSpec.describe ShippingAddress, type: :model do
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
         end
+        it '電話番号が11桁を超えたとき' do
+          @shipping_address.phone_number = '111111111111'
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
+        end
+        it '電話番号に数字以外が含まれているとき' do
+          @shipping_address.phone_number = 'あああ'
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
+        end
         it 'tokenがからのとき' do
           @shipping_address.token = nil
           @shipping_address.valid?
@@ -67,21 +82,6 @@ RSpec.describe ShippingAddress, type: :model do
         @shipping_address.item_id = nil
         @shipping_address.valid?
         expect(@shipping_address.errors.full_messages).to include "Item can't be blank"
-        end
-        it '電話番号が11桁を超えたとき' do
-          @shipping_address.phone_number = '111111111111'
-          @shipping_address.valid?
-          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
-        end
-        it '電話番号に数字以外が含まれているとき' do
-          @shipping_address.phone_number = 'あああ'
-          @shipping_address.valid?
-          expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
-        end
-        it '都道府県が空では登録できない' do
-          @shipping_address.address = nil
-          @shipping_address.valid?
-          expect(@shipping_address.errors.full_messages).to include "Address can't be blank"
         end
       end
     end 
