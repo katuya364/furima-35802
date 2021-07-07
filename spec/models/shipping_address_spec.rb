@@ -13,7 +13,7 @@ RSpec.describe ShippingAddress, type: :model do
       it '必須項目が入力されていれば購入できる' do
         expect(@shipping_address).to be_valid
       end
-      it '都道府県が空でも購入できる' do
+      it '建物名が空でも購入できる' do
         @shipping_address.building_name = ''
         expect(@shipping_address).to be_valid
       end
@@ -77,6 +77,11 @@ RSpec.describe ShippingAddress, type: :model do
           @shipping_address.phone_number = 'あああ'
           @shipping_address.valid?
           expect(@shipping_address.errors.full_messages).to include "Phone number is invalid"
+        end
+        it '都道府県が空では登録できない' do
+          @shipping_address.address = nil
+          @shipping_address.valid?
+          expect(@shipping_address.errors.full_messages).to include "Address can't be blank"
         end
       end
     end 
